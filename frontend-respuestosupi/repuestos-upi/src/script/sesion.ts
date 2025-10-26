@@ -41,6 +41,7 @@ setTimeout(() => {
     };
   } else console.log("modal no encontrado");
 
+
   const registerForm = document.getElementById("registerForm") as HTMLFormElement;
   if (registerForm) {
     registerForm.onsubmit = async (e) => {
@@ -48,16 +49,16 @@ setTimeout(() => {
 
       const nombre = (document.getElementById("nombre") as HTMLInputElement).value;
       const email = (document.getElementById("registerEmail") as HTMLInputElement).value;
-      const pass = (document.getElementById("registerPassword") as HTMLInputElement).value;
+      const password = (document.getElementById("registerPassword") as HTMLInputElement).value;
       const confirm = (document.getElementById("registerConfirm") as HTMLInputElement).value;
 
-      if (pass !== confirm) return alert("las contraseñas no coinciden");
+      if (password !== confirm) return alert("las contraseñas no coinciden");
 
       try {
-        const res = await fetch("http://localhost:8000/auth/register", {
+        const res = await fetch("http://localhost:8000/usuarios", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ nombre, email, password: pass }),
+          body: JSON.stringify({ nombre, email, password }),
         });
 
         const data = await res.json();
