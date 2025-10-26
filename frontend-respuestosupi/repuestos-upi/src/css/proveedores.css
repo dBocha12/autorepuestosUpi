@@ -1,0 +1,37 @@
+/* lista de proveedores */
+.proveedores {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.proveedor-card {
+  background: #1f232a;
+  border: 1px solid #2b2e33;
+  border-radius: 10px;
+  padding: 1.5rem;
+  width: 260px;
+  text-align: left;
+  color: var(--color-silver);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.proveedor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(10, 132, 255, 0.2);
+}
+
+.proveedor-card h3 {
+  font-family: var(--font-primary);
+  color: var(--color-accent-blue);
+  margin-bottom: 0.5rem;
+}
+
+.proveedor-card p {
+  font-size: 0.95rem;
+  color: var(--color-muted);
+  margin: 0.2rem 0;
+}

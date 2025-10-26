@@ -1,0 +1,47 @@
+/* tarjetas de inventario */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.card {
+  background: #1f232a;
+  border: 1px solid #2b2e33;
+  border-radius: 10px;
+  padding: 1rem;
+  color: var(--color-silver);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(10, 132, 255, 0.3);
+}
+
+.card h3 {
+  font-family: var(--font-primary);
+  color: var(--color-accent-blue);
+}
+
+.card p {
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+.card button {
+  margin-top: 1rem;
+  background: var(--color-accent-blue);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.card button:hover {
+  background: var(--color-accent-red);
+}

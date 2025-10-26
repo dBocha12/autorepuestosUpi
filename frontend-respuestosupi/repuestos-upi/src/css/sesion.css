@@ -1,0 +1,202 @@
+.auth-container {
+  background: linear-gradient(145deg, #1a1d23, #0f1115);
+  padding: 3rem;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 0 35px rgba(10, 132, 255, 0.35);
+  text-align: center;
+  margin: 4rem auto;
+}
+
+.auth-container h2 {
+  font-family: var(--font-primary);
+  color: var(--color-accent-blue);
+  font-size: 1.9rem;
+  margin-bottom: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  width: 100%;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 0.6rem;
+}
+
+.field label {
+  color: var(--color-silver);
+  font-size: 1rem;
+  letter-spacing: 0.4px;
+}
+
+.field input {
+  background: #23262b;
+  border: 1px solid #2f3339;
+  border-radius: 10px;
+  padding: 1rem;
+  font-size: 1rem;
+  color: #fff;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.field input::placeholder {
+  color: #8b8b8b;
+}
+
+.field input:focus {
+  border-color: var(--color-accent-blue);
+  box-shadow: 0 0 10px rgba(10, 132, 255, 0.4);
+  background: #1c1f24;
+}
+
+.auth-form button {
+  background: var(--color-accent-blue);
+  border: none;
+  color: white;
+  font-family: var(--font-primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1.1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1.5rem;
+}
+
+.auth-form button:hover {
+  background: var(--color-accent-red);
+  transform: translateY(-2px);
+}
+
+.register-text {
+  margin-top: 2.5rem;
+  color: #b3b3b3;
+  font-size: 1rem;
+}
+
+.register-text a {
+  color: var(--color-accent-blue);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-text a:hover {
+  color: var(--color-accent-red);
+}
+
+.register-text a:visited {
+  color: var(--color-accent-blue);
+}
+
+
+/* modal */
+
+/* modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: linear-gradient(145deg, #1a1d23, #0f1115);
+  padding: 2rem 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(10, 132, 255, 0.4);
+  text-align: center;
+  width: 90%;
+  max-width: 420px;
+  animation: slideUp 0.3s ease-out;
+}
+
+.close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  color: #ccc;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close:hover {
+  color: var(--color-accent-red);
+}
+
+.modal-content h3 {
+  color: var(--color-accent-blue);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.register-form input {
+  background: #23262b;
+  border: 1px solid #2f3339;
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.register-form input:focus {
+  border-color: var(--color-accent-blue);
+  box-shadow: 0 0 8px rgba(10, 132, 255, 0.4);
+}
+
+.register-form button {
+  background: var(--color-accent-blue);
+  border: none;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.register-form button:hover {
+  background: var(--color-accent-red);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
