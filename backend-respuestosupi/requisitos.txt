@@ -4,3 +4,4 @@ python-dotenv==1.0.1
 pyodbc==5.2.0
 pydantic==2.8.2
 typing-extensions==4.12.2
+bcrypt==5.0.0

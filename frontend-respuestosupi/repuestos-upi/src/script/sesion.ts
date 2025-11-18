@@ -55,7 +55,7 @@ setTimeout(() => {
       if (password !== confirm) return alert("las contraseñas no coinciden");
 
       try {
-        const res = await fetch("http://localhost:8000/usuarios", {
+        const res = await fetch("http://localhost:8000/auth/registrar", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ nombre, email, password }),
