@@ -1,0 +1,38 @@
+<h2>Administración</h2>
+<p>Gestión de usuarios del sistema.</p>
+
+<div class="admin-usuarios">
+
+  <div class="admin-header">
+    <div>
+      <h3>Usuarios</h3>
+      <span id="usuarios-count" class="badge-count">0 usuarios</span>
+    </div>
+    <button id="btnNuevoUsuario" class="btn-add">+ Nuevo usuario</button>
+  </div>
+
+  <div class="usuarios-list" id="usuarios-list">
+  </div>
+
+</div>
+
+<div id="modalUsuario" class="modal hidden">
+  <div class="modal-content modal-form">
+    <h3>Nuevo usuario</h3>
+    <form id="formUsuario">
+      <input id="inpNombreUser" type="text" placeholder="Nombre" required />
+      <input id="inpEmailUser" type="email" placeholder="Email" required />
+      <input id="inpPasswordUser" type="password" placeholder="Contraseña" required />
+
+      <select id="inpRolUser" required>
+        <option value="vendedor" selected>Vendedor</option>
+        <option value="admin">Administrador</option>
+      </select>
+
+      <div class="modal-buttons">
+        <button type="submit" class="btn-save">Guardar</button>
+        <button type="button" id="btnCancelarUsuario" class="btn-cancel">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>

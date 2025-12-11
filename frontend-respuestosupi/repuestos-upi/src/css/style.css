@@ -11,6 +11,11 @@
   --font-secondary: "Avenir", "Helvetica", sans-serif;
 }
 
+.nav-hidden {
+  display: none !important;
+}
+
+
 body {
   margin: 0;
   font-family: var(--font-secondary);

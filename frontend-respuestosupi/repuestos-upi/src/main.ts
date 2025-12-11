@@ -1,9 +1,14 @@
 import "./css/style.css";
+import { applyRoleToNav, getCurrentRol } from "./script/roles";
 
-function loadPage(page: string, cssFile?: string, scriptFile?: string) {
+function loadPage(
+  page: string,
+  cssFile?: string,
+  initModule?: () => Promise<void>
+) {
   fetch(page)
     .then(res => res.text())
-    .then(html => {
+    .then(async html => {
       const content = document.getElementById("content")!;
       content.innerHTML = html;
 
@@ -18,35 +23,66 @@ function loadPage(page: string, cssFile?: string, scriptFile?: string) {
         document.head.appendChild(link);
       }
 
-      const oldScript = document.getElementById("page-script");
-      if (oldScript) oldScript.remove();
-
-      if (scriptFile) {
-        const script = document.createElement("script");
-        script.id = "page-script";
-        script.type = "module";
-        script.src = scriptFile;
-        document.body.appendChild(script);
+      if (initModule) {
+        await initModule();
       }
     });
 }
 
 window.addEventListener("DOMContentLoaded", () => {
+  applyRoleToNav(getCurrentRol());
+
   document.getElementById("btnInicio")?.addEventListener("click", () =>
-    loadPage("/pages/inicio.html", "/src/css/inicio.css", "/src/script/inicio.ts")
+    loadPage("/pages/inicio.html", "/src/css/inicio.css", async () => {
+      const m = await import("/src/script/inicio.ts");
+      if (m.initInicio) m.initInicio();
+    })
   );
 
   document.getElementById("btnInventario")?.addEventListener("click", () =>
-    loadPage("/pages/inventario.html", "/src/css/inventario.css", "/src/script/inventario.ts")
+    loadPage("/pages/inventario.html", "/src/css/inventario.css", async () => {
+      const m = await import("/src/script/inventario.ts");
+      m.initInventario();
+    })
   );
 
   document.getElementById("btnProveedores")?.addEventListener("click", () =>
-    loadPage("/pages/proveedores.html", "/src/css/proveedores.css", "/src/script/proveedores.ts")
+    loadPage("/pages/proveedores.html", "/src/css/proveedores.css", async () => {
+      const m = await import("/src/script/proveedores.ts");
+      if (m.initProveedores) m.initProveedores();
+    })
   );
 
   document.getElementById("btnSesion")?.addEventListener("click", () =>
-    loadPage("/pages/sesion.html", "/src/css/sesion.css", "/src/script/sesion.ts")
+    loadPage("/pages/sesion.html", "/src/css/sesion.css", async () => {
+      const m = await import("/src/script/sesion.ts");
+      if (m.initSesion) m.initSesion();
+    })
   );
 
-  loadPage("/pages/inicio.html", "/src/css/inicio.css", "/src/script/inicio.ts");
+  document.getElementById("btnClientes")?.addEventListener("click", () =>
+    loadPage("/pages/clientes.html", "/src/css/clientes.css", async () => {
+      const m = await import("/src/script/clientes.ts");
+      if (m.initClientes) m.initClientes();
+    })
+  );
+
+  document.getElementById("btnCategorias")?.addEventListener("click", () =>
+    loadPage("/pages/categorias.html", "/src/css/categorias.css", async () => {
+      const m = await import("/src/script/categorias.ts");
+      if (m.initCategorias) m.initCategorias();
+    })
+  );
+
+  document.getElementById("btnAdministracion")?.addEventListener("click", () =>
+    loadPage("/pages/administracion.html", "/src/css/administracion.css", async () => {
+      const m = await import("/src/script/administracion.ts");
+      m.initAdministracion();
+    })
+  );
+
+  loadPage("/pages/inicio.html", "/src/css/inicio.css", async () => {
+    const m = await import("/src/script/inicio.ts");
+    if (m.initInicio) m.initInicio();
+  });
 });

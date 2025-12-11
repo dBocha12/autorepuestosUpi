@@ -1,41 +1,143 @@
-/* hero principal */
+.vehiculos-populares {
+  max-width: 1600px;
+  margin: 3rem auto 4rem;
+  padding: 0 1rem;
+}
+
+.vehiculos-header h2 {
+  margin-bottom: 0.3rem;
+  text-align: center;
+}
+
+.vehiculos-header p {
+  color: var(--color-muted);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* === TARJETAS MEGA CON 3 POR FILA === */
+.vehiculos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(380px, 1fr));
+  gap: 3rem;
+  justify-items: center;
+}
+
+@media (max-width: 1300px) {
+  .vehiculos-grid {
+    grid-template-columns: repeat(2, minmax(360px, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .vehiculos-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vehiculo-card {
+  background: #1f232a;
+  border-radius: 20px;
+  border: 1px solid #2c2f36;
+  padding: 2rem;
+  cursor: pointer;
+  transition: 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 520px;
+  min-height: 750px;   /* ⬅⬅⬅ TARJETA GIGANTE */
+}
+
+.vehiculo-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--color-accent-blue);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+}
+
+/* === MODELO 3D GIGANTE === */
+.vehiculo-3d {
+  width: 100%;
+  height: 480px;       /* ⬅⬅⬅ MUCHO MÁS GRANDE */
+  border-radius: 18px;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #0a84ff22, #00000055);
+  border: 1px solid #2c2f36;
+}
+
+.vehiculo-3d model-viewer {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.vehiculo-info {
+  text-align: center;
+  margin-top: 0.3rem;
+}
+
+.vehiculo-info h3 {
+  margin: 0;
+  font-size: 2rem;     
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.vehiculo-info p {
+  margin: 0.5rem 0 0;
+  font-size: 1.4rem;   
+  color: var(--color-muted);
+  font-weight: 600;
+}
+
 .hero {
   width: 100%;
   max-width: 1200px;
-  background: linear-gradient(135deg, #1a1d23, #0f1115);
-  border-radius: 16px;
+  margin: 30px auto;
   padding: 3rem 2rem;
-  box-shadow: 0 0 40px rgba(10, 132, 255, 0.2);
+  background: radial-gradient(circle at top left, #0a84ff33, transparent 55%),
+              linear-gradient(135deg, #1a1d23, #0f1115);
+  border-radius: 18px;
+  box-shadow: 0 0 40px rgba(10, 132, 255, 0.18);
+}
+
+.hero-content {
+  max-width: 620px;
+  margin: 0 auto;
+  text-align: left;
 }
 
 .hero h1 {
-  font-family: var(--font-primary);
   font-size: 3rem;
   color: var(--color-accent-blue);
-  text-shadow: 0 0 10px rgba(10, 132, 255, 0.4);
+  margin-bottom: 1rem;
 }
 
 .hero p {
-  max-width: 700px;
-  margin: 1rem auto 2rem;
   color: var(--color-muted);
   line-height: 1.6;
-  font-size: 1.1rem;
+  margin-bottom: 1.8rem;
 }
 
-.hero .cta {
-  display: inline-block;
+.hero-actions {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.hero-actions .cta {
   background: var(--color-accent-blue);
   color: white;
-  font-family: var(--font-primary);
+  padding: 1rem 2rem;
+  border-radius: 10px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  padding: 0.9rem 1.8rem;
-  border-radius: 8px;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: 0.25s ease;
+  display: inline-block;
 }
 
-.hero .cta:hover {
+.hero-actions .cta:hover {
   background: var(--color-accent-red);
   transform: scale(1.05);
 }

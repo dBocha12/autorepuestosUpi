@@ -6,23 +6,27 @@
     <title>Repuestos UPI</title>
   </head>
   <body>
-<nav>
-  <div class="nav-left">
-    <button id="btnInicio">Inicio</button>
-    <button id="btnInventario">Inventario</button>
-    <button id="btnProveedores">Proveedores</button>
-  </div>
+    <nav>
+      <div class="nav-left">
+        <button id="btnInicio">Inicio</button>
+        <button id="btnInventario">Inventario</button>
+        <button id="btnProveedores">Proveedores</button>
+        <button id="btnCategorias">Categorías</button>
+        <button id="btnAdministracion">Administracion</button>
+        <button id="btnClientes">Clientes</button>
+      </div>
 
-  <div class="nav-right">
-    <button id="btnSesion" class="icon-btn" title="Iniciar sesión">
-      <img src="/assets/icono.svg" alt="Usuario" class="icon-user">
-    </button>
-  </div>
-</nav>
-
+      <div class="nav-right">
+        <button id="btnSesion" class="icon-btn" title="Iniciar sesión">
+          <img src="/assets/icono.svg" alt="Usuario" class="icon-user">
+        </button>
+      </div>
+    </nav>
 
     <main id="content"></main>
 
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

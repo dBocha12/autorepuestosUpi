@@ -1,2 +1,74 @@
-<h2>Inventario</h2>
-<p>Aquí se mostrarán los repuestos disponibles.</p>
+<div class="inventario-page">
+  <h2>Inventario</h2>
+
+  <button id="btnNuevo" class="btn-add">+ Nuevo Repuesto</button>
+
+  <div class="toolbar">
+  <div class="toolbar-group">
+    <label for="filtroCategoria">Filtrar por:</label>
+    <select id="filtroCategoria">
+      <option value="todos">Todas las categorías</option>
+    </select>
+  </div>
+
+  <div class="toolbar-group">
+    <label for="ordenarPor">Ordenar por:</label>
+    <select id="ordenarPor">
+      <option value="nombre-asc">Nombre (A-Z)</option>
+      <option value="nombre-desc">Nombre (Z-A)</option>
+      <option value="precio-asc">Precio (menor a mayor)</option>
+      <option value="precio-desc">Precio (mayor a menor)</option>
+      <option value="stock-asc">Stock (menor a mayor)</option>
+      <option value="stock-desc">Stock (mayor a menor)</option>
+    </select>
+  </div>
+</div>
+
+<div id="grid-repuestos" class="grid"></div>
+
+
+  <div id="grid-repuestos" class="grid"></div>
+</div>
+
+<div id="modal" class="modal hidden">
+  <div class="modal-content modal-form">
+    <h3>Nuevo Repuesto</h3>
+    <form id="formRepuesto">
+      <input id="inpNombre" type="text" placeholder="Nombre" required />
+      <textarea id="inpDescripcion" placeholder="Descripción"></textarea>
+      <input id="inpPrecio" type="number" step="0.01" placeholder="Precio" required />
+      
+      <select id="inpCategoria" required>
+        <option disabled selected>Seleccione categoría</option>
+      </select>
+      
+      <select id="inpProveedor" required>
+        <option disabled selected>Seleccione proveedor</option>
+      </select>
+
+      <input id="inpStock" type="number" placeholder="Stock" required />
+      <input id="inpUbicacion" type="text" placeholder="Ubicación" required />
+
+      <div class="modal-buttons">
+        <button type="submit" class="btn-save">Guardar</button>
+        <button type="button" id="btnCancelar" class="btn-cancel">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="modalDetalle" class="modal hidden">
+  <div class="modal-content modal-detalle">
+    <h3 id="detalleNombre"></h3>
+    <p><strong>Descripción:</strong> <span id="detalleDescripcion"></span></p>
+    <p><strong>Precio:</strong> ₡<span id="detallePrecio"></span></p>
+    <p><strong>Categoría:</strong> <span id="detalleCategoria"></span></p>
+    <p><strong>Proveedor:</strong> <span id="detalleProveedor"></span></p>
+    <p><strong>Stock:</strong> <span id="detalleStock"></span></p>
+    <p><strong>Ubicación:</strong> <span id="detalleUbicacion"></span></p>
+
+    <div class="modal-buttons">
+      <button class="btn-cancel" id="cerrarDetalle">Cerrar</button>
+    </div>
+  </div>
+</div>

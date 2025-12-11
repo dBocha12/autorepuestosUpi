@@ -1,2 +1,48 @@
 <h2>Proveedores</h2>
-<p>Aquí se mostrarán los repuestos disponibles.</p>
+
+<div class="proveedores-container">
+
+  <div class="proveedores-header">
+    <div>
+      <h3>Proveedores</h3>
+      <span id="proveedores-count" class="proveedores-badge-count">0 proveedores</span>
+    </div>
+    <button id="btnNuevoProveedor" class="proveedores-btn-add">+ Nuevo proveedor</button>
+  </div>
+
+  <div class="proveedores-list" id="proveedores-list">
+    <!-- aquí se pintan las tarjetas -->
+  </div>
+
+</div>
+
+<div id="modalProveedor" class="proveedores-modal proveedores-modal-hidden">
+  <div class="proveedores-modal-content">
+    <h3>Nuevo proveedor</h3>
+    <form id="formProveedor">
+      <input
+        id="inpNombreProveedor"
+        type="text"
+        placeholder="Nombre"
+        required
+      />
+      <input
+        id="inpTelefonoProveedor"
+        type="text"
+        placeholder="Teléfono"
+      />
+      <input
+        id="inpCorreoProveedor"
+        type="email"
+        placeholder="Correo"
+      />
+
+      <div class="proveedores-modal-buttons">
+        <button type="submit" class="proveedores-btn-save">Guardar</button>
+        <button type="button" id="btnCancelarProveedor" class="proveedores-btn-cancel">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

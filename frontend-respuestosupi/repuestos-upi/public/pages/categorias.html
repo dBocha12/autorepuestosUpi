@@ -1,0 +1,38 @@
+<h2>Categorías</h2>
+<p>Gestión de categorías de repuestos.</p>
+
+<div class="categorias-container">
+
+  <div class="categorias-header">
+    <div>
+      <h3>Categorías</h3>
+      <span id="categorias-count" class="categorias-badge-count">0 categorías</span>
+    </div>
+    <button id="btnNuevaCategoria" class="categorias-btn-add">+ Nueva categoría</button>
+  </div>
+
+  <div class="categorias-list" id="categorias-list">
+  </div>
+
+</div>
+
+<div id="modalCategoria" class="categorias-modal categorias-modal-hidden">
+  <div class="categorias-modal-content">
+    <h3>Nueva categoría</h3>
+    <form id="formCategoria">
+      <input
+        id="inpNombreCategoria"
+        type="text"
+        placeholder="Nombre de la categoría"
+        required
+      />
+
+      <div class="categorias-modal-buttons">
+        <button type="submit" class="categorias-btn-save">Guardar</button>
+        <button type="button" id="btnCancelarCategoria" class="categorias-btn-cancel">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

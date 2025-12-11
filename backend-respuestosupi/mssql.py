@@ -11,10 +11,12 @@ db_password = os.getenv("PWD")
 
 def get_connection():
     conn = pyodbc.connect(
-        "DRIVER={ODBC Driver 17 for SQL Server};"
+        "DRIVER={ODBC Driver 18 for SQL Server};"
         f"SERVER={db_server};"
         f"DATABASE={db_database};"
         f"UID={db_user};"
         f"PWD={db_password};"
+        "Encrypt=no;"
+        "TrustServerCertificate=yes;"
     )
     return conn

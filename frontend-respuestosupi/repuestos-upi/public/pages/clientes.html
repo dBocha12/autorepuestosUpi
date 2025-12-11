@@ -1,0 +1,33 @@
+<h2>Clientes</h2>
+<p>Gestión de clientes del sistema.</p>
+
+<div class="admin-usuarios">
+
+  <div class="admin-header">
+    <div>
+      <h3>Clientes</h3>
+      <span id="clientes-count" class="badge-count">0 clientes</span>
+    </div>
+    <button id="btnNuevoCliente" class="btn-add">+ Nuevo cliente</button>
+  </div>
+
+  <div class="usuarios-list" id="clientes-list">
+  </div>
+
+</div>
+
+<div id="modalCliente" class="modal hidden">
+  <div class="modal-content modal-form">
+    <h3>Nuevo cliente</h3>
+    <form id="formCliente">
+      <input id="inpNombreCliente" type="text" placeholder="Nombre" required />
+      <input id="inpTelefonoCliente" type="text" placeholder="Teléfono" />
+      <input id="inpCorreoCliente" type="email" placeholder="Correo" />
+
+      <div class="modal-buttons">
+        <button type="submit" class="btn-save">Guardar</button>
+        <button type="button" id="btnCancelarCliente" class="btn-cancel">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
