@@ -31,14 +31,14 @@ export function initCategorias() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.detail || "Error al obtener categorías");
+        Swal.fire("Error", data.detail || "Error al obtener categorías", "error");
         return;
       }
 
       renderCategorias(data);
     } catch (err) {
       console.error(err);
-      alert("Error de conexión con el servidor");
+      Swal.fire("Error", "Error de conexión con el servidor", "error");
     }
   }
 
@@ -52,9 +52,7 @@ export function initCategorias() {
       return;
     }
 
-    badgeCount.textContent = `${categorias.length} categoría${
-      categorias.length !== 1 ? "s" : ""
-    }`;
+    badgeCount.textContent = `${categorias.length} categoría${categorias.length !== 1 ? "s" : ""}`;
 
     categorias.forEach(c => {
       const item = document.createElement("div");
@@ -77,7 +75,6 @@ export function initCategorias() {
     });
   }
 
-  // abrir modal
   btnNuevaCategoria.addEventListener("click", () => {
     modalCategoria.classList.remove("categorias-modal-hidden");
     formCategoria.reset();
@@ -85,13 +82,11 @@ export function initCategorias() {
     inp?.focus();
   });
 
-  // cerrar modal (botón cancelar)
   btnCancelarCategoria.addEventListener("click", () => {
     modalCategoria.classList.add("categorias-modal-hidden");
     formCategoria.reset();
   });
 
-  // cerrar modal clickeando fuera
   modalCategoria.addEventListener("click", e => {
     if (e.target === modalCategoria) {
       modalCategoria.classList.add("categorias-modal-hidden");
@@ -99,14 +94,13 @@ export function initCategorias() {
     }
   });
 
-  // submit crear categoría
   formCategoria.addEventListener("submit", async e => {
     e.preventDefault();
 
     const nombre = (document.getElementById("inpNombreCategoria") as HTMLInputElement).value.trim();
 
     if (!nombre) {
-      alert("El nombre de la categoría es obligatorio.");
+      Swal.fire("Campo obligatorio", "El nombre de la categoría es obligatorio.", "warning");
       return;
     }
 
@@ -120,21 +114,31 @@ export function initCategorias() {
       if (!res.ok) {
         const txt = await res.text();
         console.error(txt);
-        alert("Error al crear categoría");
+        Swal.fire("Error", "Error al crear categoría", "error");
         return;
       }
 
+      Swal.fire("Éxito", "Categoría creada correctamente", "success");
       modalCategoria.classList.add("categorias-modal-hidden");
       formCategoria.reset();
       await cargarCategorias();
     } catch (err) {
       console.error(err);
-      alert("Error de conexión al crear categoría");
+      Swal.fire("Error", "Error de conexión al crear categoría", "error");
     }
   });
 
   async function eliminarCategoria(id: number) {
-    if (!confirm("¿Seguro que desea eliminar esta categoría?")) return;
+    const confirm = await Swal.fire({
+      title: "¿Eliminar categoría?",
+      text: "Esta acción no se puede deshacer",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar",
+    });
+
+    if (!confirm.isConfirmed) return;
 
     try {
       const res = await fetch(`${API_CATEGORIAS}/${id}`, {
@@ -144,14 +148,15 @@ export function initCategorias() {
       if (!res.ok) {
         const txt = await res.text();
         console.error(txt);
-        alert("Error al eliminar categoría");
+        Swal.fire("Error", "Error al eliminar categoría", "error");
         return;
       }
 
+      Swal.fire("Eliminada", "La categoría ha sido eliminada", "success");
       await cargarCategorias();
     } catch (err) {
       console.error(err);
-      alert("Error de conexión al eliminar categoría");
+      Swal.fire("Error", "Error de conexión al eliminar categoría", "error");
     }
   }
 

@@ -20,12 +20,12 @@ setTimeout(() => {
 
         if (res.ok && data.token) {
           if (data.rol) setCurrentRol(data.rol);
-          alert("inicio de sesión correcto");
+          Swal.fire({icon: "success", title: "Éxito", text: "Inicio de sesión correcto"});
         } else {
-          alert(data.detail || "credenciales inválidas");
+          Swal.fire({icon: "error", title: "Error", text: data.detail || "Credenciales inválidas"});
         }
       } catch {
-        alert("error de conexión con el servidor");
+        Swal.fire({icon: "error", title: "Error", text: "Error de conexión con el servidor"});
       }
     };
   }
@@ -57,7 +57,7 @@ setTimeout(() => {
       const confirm = (document.getElementById("registerConfirm") as HTMLInputElement).value;
 
       if (passwordR !== confirm) {
-        alert("las contraseñas no coinciden");
+        Swal.fire({icon: "warning", title: "Atención", text: "Las contraseñas no coinciden"});
         return;
       }
 
@@ -72,11 +72,12 @@ setTimeout(() => {
 
         if (res.ok) {
           modal?.classList.add("hidden");
+          Swal.fire({icon: "success", title: "Éxito", text: data.message});
+        } else {
+          Swal.fire({icon: "error", title: "Error", text: data.detail || "Error al registrar"});
         }
-
-        alert(res.ok ? data.message : data.detail || "error al registrar");
       } catch {
-        alert("error de conexión con el servidor");
+        Swal.fire({icon: "error", title: "Error", text: "Error de conexión con el servidor"});
       }
     };
   }

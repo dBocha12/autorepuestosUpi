@@ -1,0 +1,47 @@
+<h2>Pedidos</h2>
+<p>Gestión de pedidos de clientes.</p>
+
+<div class="pedidos-container">
+  <div class="pedidos-header">
+    <div>
+      <h3>Pedidos</h3>
+      <span id="pedidos-count" class="pedidos-badge-count">0 pedidos</span>
+    </div>
+    <button id="btnNuevoPedido" class="pedidos-btn-add">+ Nuevo pedido</button>
+  </div>
+
+  <div class="pedidos-list" id="pedidos-list">
+  </div>
+</div>
+
+<div id="modalPedido" class="pedidos-modal pedidos-modal-hidden">
+  <div class="pedidos-modal-content">
+    <h3>Nuevo pedido</h3>
+    <form id="formPedido">
+      <label for="inpPedidoCliente">Cliente</label>
+      <select id="inpPedidoCliente" required></select>
+
+      <div class="pedido-items-header">
+        <span>Repuestos</span>
+        <button type="button" id="btnAgregarLinea" class="pedidos-btn-mini">
+          + Agregar línea
+        </button>
+      </div>
+
+      <div id="pedidoItemsContainer" class="pedido-items-container">
+      </div>
+
+      <div class="pedido-total-box">
+        <span>Total estimado:</span>
+        <strong id="pedidoTotalPreview">₡0.00</strong>
+      </div>
+
+      <div class="pedidos-modal-buttons">
+        <button type="submit" class="pedidos-btn-save">Guardar pedido</button>
+        <button type="button" id="btnCancelarPedido" class="pedidos-btn-cancel">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

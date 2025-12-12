@@ -26,14 +26,14 @@ export function initAdministracion() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.detail || "Error al obtener usuarios");
+        Swal.fire("Error", data.detail || "Error al obtener usuarios", "error");
         return;
       }
 
       renderUsuarios(data);
     } catch (err) {
       console.error(err);
-      alert("Error de conexión con el servidor");
+      Swal.fire("Error", "Error de conexión con el servidor", "error");
     }
   }
 
@@ -63,18 +63,18 @@ export function initAdministracion() {
       const rolLabel = u.rol === "admin" ? "ADMINISTRADOR" : "VENDEDOR";
 
       item.innerHTML = `
-                <div class="usuario-main">
-                    <div class="usuario-avatar">${iniciales}</div>
-                    <div class="usuario-info">
-                        <span>${u.nombre}</span>
-                        <span class="user-email">${u.email}</span>
-                    </div>
-                </div>
-                <div class="usuario-actions">
-                    <span class="user-role-badge ${rolClass}">${rolLabel}</span>
-                    <button class="btn-delete-user">ELIMINAR</button>
-                </div>
-            `;
+        <div class="usuario-main">
+            <div class="usuario-avatar">${iniciales}</div>
+            <div class="usuario-info">
+                <span>${u.nombre}</span>
+                <span class="user-email">${u.email}</span>
+            </div>
+        </div>
+        <div class="usuario-actions">
+            <span class="user-role-badge ${rolClass}">${rolLabel}</span>
+            <button class="btn-delete-user">ELIMINAR</button>
+        </div>
+      `;
 
       const btnDelete = item.querySelector(".btn-delete-user") as HTMLButtonElement;
       btnDelete.addEventListener("click", () => eliminarUsuario(u.id));
@@ -109,7 +109,7 @@ export function initAdministracion() {
     const rol = (document.getElementById("inpRolUser") as HTMLSelectElement).value;
 
     if (!nombre || !email || !password) {
-      alert("Complete todos los campos.");
+      Swal.fire("Campos incompletos", "Complete todos los campos.", "warning");
       return;
     }
 
@@ -123,21 +123,31 @@ export function initAdministracion() {
       if (!res.ok) {
         const txt = await res.text();
         console.error(txt);
-        alert("Error al crear usuario");
+        Swal.fire("Error", "Error al crear usuario", "error");
         return;
       }
 
+      Swal.fire("Éxito", "Usuario creado correctamente", "success");
       modalUsuario.classList.add("hidden");
       formUsuario.reset();
       await cargarUsuarios();
     } catch (err) {
       console.error(err);
-      alert("Error de conexión al crear usuario");
+      Swal.fire("Error", "Error de conexión al crear usuario", "error");
     }
   });
 
   async function eliminarUsuario(id: number) {
-    if (!confirm("¿Seguro que desea eliminar este usuario?")) return;
+    const confirm = await Swal.fire({
+      title: "¿Eliminar usuario?",
+      text: "Esta acción no se puede deshacer",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar"
+    });
+
+    if (!confirm.isConfirmed) return;
 
     try {
       const res = await fetch(`${API_USERS}/${id}`, {
@@ -147,14 +157,15 @@ export function initAdministracion() {
       if (!res.ok) {
         const txt = await res.text();
         console.error(txt);
-        alert("Error al eliminar usuario");
+        Swal.fire("Error", "Error al eliminar usuario", "error");
         return;
       }
 
+      Swal.fire("Eliminado", "El usuario ha sido eliminado", "success");
       await cargarUsuarios();
     } catch (err) {
       console.error(err);
-      alert("Error de conexión al eliminar usuario");
+      Swal.fire("Error", "Error de conexión al eliminar usuario", "error");
     }
   }
 

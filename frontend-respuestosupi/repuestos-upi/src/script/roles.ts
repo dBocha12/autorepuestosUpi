@@ -8,13 +8,14 @@ const ALL_TABS = [
   "btnProveedores",
   "btnClientes",
   "btnAdministracion",
-  "btnSesion"
+  "btnSesion",
+  "btnCategorias"
 ];
 
 const CONFIG_ROL: Record<Rol, string[]> = {
-  anon: ["btnInicio", "btnSesion"],
-  vendedor: ["btnInicio", "btnInventario", "btnProveedores", "btnClientes", "btnSesion", "btnCategorias"],
-  admin: ["btnInicio", "btnInventario", "btnProveedores", "btnClientes", "btnAdministracion", "btnSesion", "btnCategorias"]
+  anon: ["btnInicio", "btnSesion", "btnAdministracion"],
+  vendedor: ["btnInicio", "btnInventario", "btnProveedores", "btnClientes", "btnSesion", "btnCategorias", "btnPedidos"],
+  admin: ["btnInicio", "btnInventario", "btnProveedores", "btnClientes", "btnAdministracion", "btnSesion", "btnCategorias", "btnPedidos"]
 };
 
 export function getCurrentRol(): Rol {

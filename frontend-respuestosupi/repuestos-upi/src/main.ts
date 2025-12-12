@@ -81,6 +81,13 @@ window.addEventListener("DOMContentLoaded", () => {
     })
   );
 
+  document.getElementById("btnPedidos")?.addEventListener("click", () =>
+    loadPage("/pages/pedidos.html", "/src/css/pedidos.css", async () => {
+      const m = await import("/src/script/pedidos.ts");
+      m.initPedidos();
+    })
+  );
+
   loadPage("/pages/inicio.html", "/src/css/inicio.css", async () => {
     const m = await import("/src/script/inicio.ts");
     if (m.initInicio) m.initInicio();

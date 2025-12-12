@@ -4,6 +4,7 @@ const API_PROVS = "http://localhost:8000/proveedores/";
 
 export function initInventario() {
   let repuestosData: any[] = [];
+  let repuestoSeleccionado: any = null;
 
   const selFiltroCategoria = document.getElementById("filtroCategoria") as HTMLSelectElement | null;
   const selOrdenarPor = document.getElementById("ordenarPor") as HTMLSelectElement | null;
@@ -13,8 +14,17 @@ export function initInventario() {
   const btnNuevo = document.getElementById("btnNuevo") as HTMLElement | null;
   const btnCancelar = document.getElementById("btnCancelar") as HTMLElement | null;
   const form = document.getElementById("formRepuesto") as HTMLFormElement | null;
+  const btnEditarStock = document.getElementById("btnEditarStock") as HTMLButtonElement | null;
 
-  if (!document.getElementById("grid-repuestos") || !modalDetalle || !btnCerrarDetalle || !modal || !btnNuevo || !btnCancelar || !form) {
+  if (
+    !document.getElementById("grid-repuestos") ||
+    !modalDetalle ||
+    !btnCerrarDetalle ||
+    !modal ||
+    !btnNuevo ||
+    !btnCancelar ||
+    !form
+  ) {
     console.error("inventario: elementos necesarios no encontrados");
     return;
   }
@@ -40,14 +50,14 @@ export function initInventario() {
       const card = document.createElement("div");
       card.className = "card";
       card.innerHTML = `
-            <h3>${r.nombre}</h3>
-            <p>${(r.descripcion ?? "").slice(0, 70)}${r.descripcion?.length > 70 ? "..." : ""}</p>
-            <p class="card-price">₡${r.precio}</p>
-            <div class="card-meta">
-                <span>Stock: ${r.cantidad}</span>
-                <span>${r.categoria ?? ""}</span>
-            </div>
-        `;
+        <h3>${r.nombre}</h3>
+        <p>${(r.descripcion ?? "").slice(0, 70)}${r.descripcion?.length > 70 ? "..." : ""}</p>
+        <p class="card-price">₡${r.precio}</p>
+        <div class="card-meta">
+            <span>Stock: ${r.cantidad}</span>
+            <span>${r.categoria ?? ""}</span>
+        </div>
+      `;
       card.addEventListener("click", () => mostrarDetalle(r));
       cont.appendChild(card);
     });
@@ -109,6 +119,7 @@ export function initInventario() {
   }
 
   function mostrarDetalle(r: any) {
+    repuestoSeleccionado = r;
     (document.getElementById("detalleNombre") as HTMLElement | null)!.textContent = r.nombre;
     (document.getElementById("detalleDescripcion") as HTMLElement | null)!.textContent = r.descripcion;
     (document.getElementById("detallePrecio") as HTMLElement | null)!.textContent = r.precio;
@@ -116,27 +127,66 @@ export function initInventario() {
     (document.getElementById("detalleProveedor") as HTMLElement | null)!.textContent = r.proveedor;
     (document.getElementById("detalleStock") as HTMLElement | null)!.textContent = r.cantidad;
     (document.getElementById("detalleUbicacion") as HTMLElement | null)!.textContent = r.ubicacion;
-    modalDetalle.classList.remove("hidden");
+    modalDetalle!.classList.remove("hidden");
   }
 
   btnCerrarDetalle.addEventListener("click", () => {
-    modalDetalle.classList.add("hidden");
+    modalDetalle!.classList.add("hidden");
   });
 
   modalDetalle.addEventListener("click", e => {
     if (e.target === modalDetalle) modalDetalle.classList.add("hidden");
   });
 
+  if (btnEditarStock) {
+    btnEditarStock.addEventListener("click", async () => {
+      if (!repuestoSeleccionado) return;
+
+      const actual = repuestoSeleccionado.cantidad ?? 0;
+      const nuevoStr = prompt("Nuevo stock:", String(actual));
+      if (nuevoStr === null) return;
+      const nuevo = Number(nuevoStr);
+
+      if (Number.isNaN(nuevo) || nuevo < 0) {
+        Swal.fire({icon: "error", title: "Error", text: "Cantidad inválida"});
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API}${repuestoSeleccionado.id_repuesto}/stock`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ cantidad: nuevo })
+        });
+
+        if (!res.ok) {
+          const txt = await res.text();
+          console.error(txt);
+          Swal.fire({icon: "error", title: "Error", text: "Error al actualizar el stock"});
+          return;
+        }
+
+        const actualizado = await res.json();
+        repuestoSeleccionado.cantidad = actualizado.cantidad;
+        (document.getElementById("detalleStock") as HTMLElement | null)!.textContent = String(actualizado.cantidad);
+        await cargarRepuestos();
+      } catch (err) {
+        console.error(err);
+        Swal.fire({icon: "error", title: "Error", text: "Error de comunicación con el servidor"});
+      }
+    });
+  }
+
   btnNuevo.addEventListener("click", () => {
-    modal.classList.remove("hidden");
+    modal!.classList.remove("hidden");
     cargarCatalogos().catch(err => {
       console.error(err);
-      alert("No se pudieron cargar categorías/proveedores");
+      Swal.fire({icon: "error", title: "Error", text: "No se pudieron cargar categorías/proveedores"});
     });
   });
 
   btnCancelar.addEventListener("click", () => {
-    modal.classList.add("hidden");
+    modal!.classList.add("hidden");
     form.reset();
   });
 
@@ -198,11 +248,11 @@ export function initInventario() {
     if (!res.ok) {
       const txt = await res.text();
       console.error(txt);
-      alert("Error al guardar");
+      Swal.fire({icon: "error", title: "Error", text: "Error al guardar"});
       return;
     }
 
-    modal.classList.add("hidden");
+    modal!.classList.add("hidden");
     form.reset();
     await cargarRepuestos();
   });
@@ -217,7 +267,7 @@ export function initInventario() {
   setTimeout(() => {
     cargarRepuestos().catch(err => {
       console.error(err);
-      alert("No se pudieron cargar los repuestos");
+      Swal.fire({icon: "error", title: "Error", text: "No se pudieron cargar los repuestos"});
     });
   }, 300);
 }

@@ -33,14 +33,14 @@ export function initProveedores() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.detail || "Error al obtener proveedores");
+        Swal.fire({icon: "error", title: "Error", text: data.detail || "Error al obtener proveedores"});
         return;
       }
 
       renderProveedores(data);
     } catch (err) {
       console.error(err);
-      alert("Error de conexión con el servidor");
+      Swal.fire({icon: "error", title: "Error", text: "Error de conexión con el servidor"});
     }
   }
 
@@ -118,7 +118,7 @@ function renderProveedores(proveedores: Proveedor[]) {
     const correo = (document.getElementById("inpCorreoProveedor") as HTMLInputElement).value.trim();
 
     if (!nombre) {
-      alert("El nombre del proveedor es obligatorio.");
+      Swal.fire({icon: "warning", title: "Atención", text: "El nombre del proveedor es obligatorio."});
       return;
     }
 
@@ -136,7 +136,7 @@ function renderProveedores(proveedores: Proveedor[]) {
       if (!res.ok) {
         const txt = await res.text();
         console.error(txt);
-        alert("Error al crear proveedor");
+        Swal.fire({icon: "error", title: "Error", text: "Error al crear proveedor"});
         return;
       }
 
@@ -145,7 +145,7 @@ function renderProveedores(proveedores: Proveedor[]) {
       await cargarProveedores();
     } catch (err) {
       console.error(err);
-      alert("Error de conexión al crear proveedor");
+      Swal.fire({icon: "error", title: "Error", text: "Error de conexión al crear proveedor"});
     }
   });
 
@@ -160,14 +160,14 @@ function renderProveedores(proveedores: Proveedor[]) {
       if (!res.ok) {
         const txt = await res.text();
         console.error(txt);
-        alert("Error al eliminar proveedor");
+        Swal.fire({icon: "error", title: "Error", text: "Error al eliminar proveedor"});
         return;
       }
 
       await cargarProveedores();
     } catch (err) {
       console.error(err);
-      alert("Error de conexión al eliminar proveedor");
+      Swal.fire({icon: "error", title: "Error", text: "Error de conexión al eliminar proveedor"});
     }
   }
 
