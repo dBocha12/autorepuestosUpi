@@ -19,4 +19,10 @@ def get_connection():
         "Encrypt=no;"
         "TrustServerCertificate=yes;"
     )
+
+    cur = conn.cursor()
+    cur.execute("SELECT @@SERVERNAME, DB_NAME()")
+    row = cur.fetchone()
+    print("Conectado a servidor:", row[0], "DB:", row[1])
+
     return conn

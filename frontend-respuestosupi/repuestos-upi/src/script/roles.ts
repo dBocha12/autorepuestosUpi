@@ -9,11 +9,12 @@ const ALL_TABS = [
   "btnClientes",
   "btnAdministracion",
   "btnSesion",
-  "btnCategorias"
+  "btnCategorias",
+  "btnPedidos"
 ];
 
 const CONFIG_ROL: Record<Rol, string[]> = {
-  anon: ["btnInicio", "btnSesion", "btnAdministracion"],
+  anon: ["btnInicio", "btnSesion"],
   vendedor: ["btnInicio", "btnInventario", "btnProveedores", "btnClientes", "btnSesion", "btnCategorias", "btnPedidos"],
   admin: ["btnInicio", "btnInventario", "btnProveedores", "btnClientes", "btnAdministracion", "btnSesion", "btnCategorias", "btnPedidos"]
 };
